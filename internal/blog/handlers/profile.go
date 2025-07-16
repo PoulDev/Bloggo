@@ -2,18 +2,21 @@ package handlers
 
 import (
 	"html/template"
+	"log"
 	"net/http"
-	"strconv"
 	"path"
+	"strconv"
 
-	"github.com/PoulDev/lgBlog/internal/blog/model"
 	"github.com/PoulDev/lgBlog/internal/blog/db"
+	"github.com/PoulDev/lgBlog/internal/blog/db/auth"
+	"github.com/PoulDev/lgBlog/internal/blog/model"
 )
 
 type Profile struct {
 	model.Author
 	Posts []model.Post
 	PostsNum int
+	IsItMe bool // is the client visiting the page the profile owner?
 }
 
 func ProfilePage(w http.ResponseWriter, r *http.Request) {
@@ -32,37 +35,32 @@ func ProfilePage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	// get token from cookie
+	token, err := r.Cookie("token")
+	isItMe := false
+	if err == nil {
+		claims, err := auth.CheckToken(token.Value)
+		if err != nil {
+			isItMe = false
+		} else {
+			
+			isItMe = int64(claims["uid"].(float64)) == authorId
+			log.Println(claims["uid"], authorId, isItMe)
+		}
+	}
+
+	posts, err := db.GetPostsByAuthor(authorId)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
 	profile := Profile{
 		Author: author,
-		Posts: []model.Post{
-			{
-				ID: 1,
-				Title: "Hello, world!",
-				Content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor...",
-			},
-			{
-				ID: 2,
-				Title: "Hello, world!",
-				Content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor...",
-			},
-			{
-				ID: 3,
-				Title: "Hello, world!",
-				Content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor...",
-			},
-			{
-				ID: 4,
-				Title: "Hello, world!",
-				Content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor...",
-			},
-			{
-				ID: 5,
-				Title: "Hello, world!",
-				Content: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non risus. Suspendisse lectus tortor...",
-			},
-		},
+		IsItMe: isItMe,
+		Posts: posts,
+		PostsNum: len(posts),
 	}
-	profile.PostsNum = len(profile.Posts)
 
 	fp := path.Join("web", "templates", "author.html")
 	tmpl, err := template.ParseFiles(fp)

@@ -8,6 +8,24 @@
     </head>
     <body>
         <div class="content">
+            {{ if .IsItMe }}
+
+            <div>
+                <form action="/profile" method="patch" class="profile">
+                    <div class="picture">
+                        <img src="{{ .Picture }}" alt="Profile picture">
+                        <input type="url" name="picture" value="{{ .Picture }}">
+                    </div>
+                    <div class="info">
+                        <input class="labelinput" type="text" name="name" value="{{ .Name }}">
+                        <p>{{ .PostsNum }} posts</p>
+                        <button type="submit">Update Profile</a>
+                    </div>
+                </form>
+            </div>
+
+            {{ else }}
+            
             <div class="profile">
                 <img src="{{ .Picture }}" alt="Profile picture">
                 <div class="info">
@@ -15,14 +33,20 @@
                     <p>{{ .PostsNum }} posts</p>
                 </div>
             </div>
+            {{ end }}
+            
 
             <div class="posts">
-                <h2>Posts</h2>
-                {{ range .Posts }}
-                    <div class="post">
-                        <a href="/post/{{ .ID }}"><h3>{{ .Title }}</h3></a>
-                        <p>{{ .Content }}</p>
-                    </div>
+                {{ if .PostsNum }}
+                    <h2>Blog Posts</h2>
+                    {{ range .Posts }}
+                        <div class="post">
+                            <a href="/post/{{ .ID }}"><h3>{{ .Title }}</h3></a>
+                            <p>{{ .Content }}</p>
+                        </div>
+                    {{ end }}
+                {{ else }}
+                <h3> Nothing to see here...</h3>
                 {{ end }}
             </div>
         </div>
