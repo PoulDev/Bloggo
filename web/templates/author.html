@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title></title>
+        <link href="/css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="content">
+            <div class="profile">
+                <img src="{{ .Picture }}" alt="Profile picture">
+                <div class="info">
+                    <h1>{{ .Name }}</h1>
+                    <p>{{ .PostsNum }} posts</p>
+                </div>
+            </div>
+
+            <div class="posts">
+                <h2>Posts</h2>
+                {{ range .Posts }}
+                    <div class="post">
+                        <a href="/post/{{ .ID }}"><h3>{{ .Title }}</h3></a>
+                        <p>{{ .Content }}</p>
+                    </div>
+                {{ end }}
+            </div>
+        </div>
+    </body>
+</html>

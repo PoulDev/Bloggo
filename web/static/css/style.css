@@ -1,0 +1,99 @@
+:root {
+    --text: #f4f0f1;
+    --background: #080607;
+    --primary: #c5b2b7;
+    --secondary: #648C88;
+    --accent: #797c9a;
+    --error: #aa2c2c;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text);
+    font-family: sans-serif;
+}
+
+.content {
+    width: 90%;
+    max-width: 700px;
+    margin: 0 auto;
+    padding-top: 2rem;
+}
+
+input {
+    height: 1.5rem;
+    background-color: var(--background);
+    color: var(--text);
+    border-radius: 0rem;
+    border: none;
+    outline: 1px solid var(--secondary);
+    outline-offset: -1px;
+}
+
+button {
+    height: 1.5rem;
+    background-color: var(--primary);
+    color: var(--background);
+    border-radius: 0rem;
+    box-shadow: none;
+    outline: none;
+    border: none;
+}
+
+form input, form button {
+    width: 100%;
+    margin: 0.2rem;
+}
+
+form {}
+
+.message-info {
+    color: var(--primary);
+}
+
+.message-error {
+    color: var(--error);
+}
+
+.profile img {
+    width: 100px;
+    height: 100px;
+    min-width: 100px;
+    min-height: 100px;
+
+    border-radius: 20%;
+    object-fit: cover;
+}
+
+.profile .info p, .profile .info h1 {
+    margin: 0;
+}
+
+.profile {
+    display: flex;
+    align-items: top;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--primary);
+}
+
+.posts > h2 {
+    text-align: center;
+}
+
+.posts .post {
+    border-radius: 0rem;
+    border: 1.5px solid var(--primary);
+    padding: 1rem;
+    margin: 1rem;
+}
+
+.posts a {
+    text-decoration: none;
+    color: var(--text);
+}
+
+.posts .post h3 {
+    color: var(--secondary);
+    margin: 0;
+}
