@@ -7,9 +7,11 @@ import (
 	"os"
 
 	"github.com/PoulDev/lgBlog/internal/blog/model"
+	"github.com/microcosm-cc/bluemonday"
 )
 
 var DB *sql.DB
+var bmp *bluemonday.Policy
 
 func dbExists(path string) bool {
     _, err := os.Stat(path)
@@ -40,9 +42,16 @@ func initSchema(db *sql.DB) {
 
 	log.Println("Login using username: admin, password:", password)
 
+	_, err = NewPost("Titolone", "contenuto contenuto <h1>contenuuuuto</h1>", "descrizione bellona", []int64{1})
+	if (err != nil) {
+		log.Fatal(err)
+	}
+
 }
 
 func LoadDB(filepath string) *sql.DB {
+	bmp = bluemonday.UGCPolicy()
+
 	exists := dbExists(filepath)
 
     db, err := sql.Open("sqlite3", filepath)

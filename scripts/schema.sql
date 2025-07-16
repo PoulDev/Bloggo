@@ -2,6 +2,8 @@ CREATE TABLE IF NOT EXISTS posts (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     title char(128) NOT NULL,
     content TEXT NOT NULL,
+    contentRaw TEXT NOT NULL,
+    description TEXT NOT NULL,
     created_at TIMESTAMP NOT NULL
 );
 

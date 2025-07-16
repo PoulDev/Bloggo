@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title></title>
+        <link href="/css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="posts">
+            {{ if .PostsNum }}
+                <h2>Blog Posts</h2>
+                {{ range .Posts }}
+                    <div class="post">
+                        <a href="/post/{{ .ID }}"><h3>{{ .Title }}</h3></a>
+                        <p>{{ .Description }}</p>
+                    </div>
+                {{ end }}
+            {{ else }}
+            <h3> Nothing to see here...</h3>
+            {{ end }}
+        </div>
+    </body>
+</html>

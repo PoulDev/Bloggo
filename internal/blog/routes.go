@@ -4,13 +4,19 @@ import (
 	"net/http"
 
 	"github.com/PoulDev/lgBlog/internal/blog/handlers"
+	"github.com/microcosm-cc/bluemonday"
+)
+
+var (
+	Bmp *bluemonday.Policy
 )
 
 func RegisterHandlers(mux *http.ServeMux) {
-    mux.Handle("/", http.FileServer(http.Dir("./web/static/")))
+    mux.HandleFunc("/", handlers.Main)
 	mux.HandleFunc("/login", handlers.Login)
 	mux.HandleFunc("/profile", handlers.ProfilePage)
-
-	// handle /post/{id}
 	mux.HandleFunc("/post/", handlers.PostPage)
+	mux.HandleFunc("/write", handlers.WriteHandler)
+
+    mux.Handle("/css/", http.FileServer(http.Dir("./web/static/")))
 }

@@ -22,6 +22,9 @@ body {
 
 input {
     height: 1.5rem;
+}
+
+input, textarea {
     background-color: var(--background);
     color: var(--text);
     border-radius: 0rem;
@@ -38,6 +41,10 @@ button {
     box-shadow: none;
     outline: none;
     border: none;
+}
+
+button:hover {
+    background-color: var(--secondary);
 }
 
 form input, form button {
@@ -69,6 +76,25 @@ form {}
     margin: 0;
 }
 
+.author {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    gap: 1rem;
+    padding-bottom: 1rem;
+}
+
+.author a {
+    text-decoration: none;
+    color: var(--secondary);
+}
+
+.author img {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+}
+
 .profile {
     display: flex;
     align-items: top;
@@ -94,7 +120,6 @@ form {}
 
 .posts > h2 {
     text-align: center;
-    color: var(--secondary);
 }
 
 .posts > h3 {

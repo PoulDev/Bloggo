@@ -15,7 +15,7 @@ type Account struct {
 	ID      int64
 	Name    string
 	Picture string
-	Role 	int16
+	Role    int16
 	Pwd     []byte
 	Salt    []byte
 }
@@ -27,17 +27,18 @@ type Author struct {
 }
 
 type Post struct {
-	ID      int64
-	Title   string
-	Content string
-	Created time.Time
-	Authors []Author
+	ID          int64
+	Title       string
+	Description string
+	Content     string
+	ContentRaw  string
+	Created     time.Time
+	Authors     []Author
 }
 
 type Comment struct {
-	ID      int64
-	Comment string
+	ID         int64
+	Comment    string
 	Created_at time.Time
-	Post    int64
+	Post       int64
 }
-

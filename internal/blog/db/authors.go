@@ -18,10 +18,14 @@ func GetAuthor(authorId int64) (model.Author, error) {
 }
 
 func GetPostsByAuthor(authorId int64) ([]model.Post, error) {
+	// This function doesn't return the post content to mantain it lightweight.
+	// Why? because it's used only in /profile, and in that page only the post 
+	// title and description are needed
+
 	var posts []model.Post
 
 	rows, err := DB.Query(`
-        SELECT p.id, p.title, p.content, p.created_at
+        SELECT p.id, p.title, p.description
         FROM posts p
         JOIN post_authors pa ON pa.post = p.id
         WHERE pa.author = ?`, authorId)
@@ -32,7 +36,7 @@ func GetPostsByAuthor(authorId int64) ([]model.Post, error) {
 
 	for rows.Next() {
         var p model.Post
-        if err := rows.Scan(&p.ID, &p.Title, &p.Content, &p.Created); err != nil {
+        if err := rows.Scan(&p.ID, &p.Title, &p.Description); err != nil {
             return nil, err
         }
         posts = append(posts, p)
