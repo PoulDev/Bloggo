@@ -7,11 +7,13 @@
         <link href="/css/style.css" rel="stylesheet">
     </head>
     <body>
-        <p class="message-{{ .Type }}">{{ .Message }}</p>
-        <form action="/login" method="post">
-            <input type="text" name="username" placeholder="John Doe" required>
-            <input type="password" name="password" placeholder="P@ss*0rD" required>
-            <button type="submit">Login</button>
-        </form>
+        <div class="content">
+            <p class="message-{{ .Type }}">{{ .Message }}</p>
+            <form action="/login" method="post">
+                <input type="text" name="username" placeholder="John Doe" required>
+                <input type="password" name="password" placeholder="P@ss*0rD" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
     </body>
 </html>

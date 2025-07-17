@@ -2,7 +2,6 @@ package handlers
 
 import (
 	"html/template"
-	"log"
 	"net/http"
 	"path"
 	"strconv"
@@ -10,10 +9,13 @@ import (
 	"github.com/PoulDev/lgBlog/internal/blog/db"
 	"github.com/PoulDev/lgBlog/internal/blog/db/auth"
 	"github.com/PoulDev/lgBlog/internal/blog/model"
+	"github.com/PoulDev/lgBlog/internal/blog/config"
 )
 
 type Profile struct {
 	model.Author
+	model.BasePageData
+
 	Posts []model.Post
 	PostsNum int
 	IsItMe bool // is the client visiting the page the profile owner?
@@ -21,12 +23,31 @@ type Profile struct {
 
 func ProfilePage(w http.ResponseWriter, r *http.Request) {
 	authorIDstr := r.URL.Query().Get("author")
-	// TODO: Get author from database
+	
+	// get token from cookie
+	loggedUserId := int64(0)
+	isItMe := false
+
+	token, err := r.Cookie("token")
+	if err == nil {
+		claims, err := auth.CheckToken(token.Value)
+		if err == nil {
+			loggedUserId = int64(claims["uid"].(float64))
+		}
+	}
 
 	authorId, err := strconv.ParseInt(authorIDstr, 10, 64)
 	if err != nil {
-		http.Error(w, "Invalid author ID!", http.StatusInternalServerError)
-		return
+		if loggedUserId != 0 {
+			authorId = loggedUserId
+		} else {
+			http.Error(w, "Invalid author ID!", http.StatusInternalServerError)
+			return
+		}
+	}
+
+	if loggedUserId != 0 {
+		isItMe = loggedUserId == authorId
 	}
 
 	author, err := db.GetAuthor(authorId)
@@ -35,19 +56,6 @@ func ProfilePage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	// get token from cookie
-	token, err := r.Cookie("token")
-	isItMe := false
-	if err == nil {
-		claims, err := auth.CheckToken(token.Value)
-		if err != nil {
-			isItMe = false
-		} else {
-			
-			isItMe = int64(claims["uid"].(float64)) == authorId
-			log.Println(claims["uid"], authorId, isItMe)
-		}
-	}
 
 	posts, err := db.GetPostsByAuthor(authorId)
 	if err != nil {
@@ -57,6 +65,8 @@ func ProfilePage(w http.ResponseWriter, r *http.Request) {
 
 	profile := Profile{
 		Author: author,
+		BasePageData: model.BasePageData{SiteTitle: config.Title, SiteDescription: config.Description, LoggedIn: loggedUserId != 0},
+
 		IsItMe: isItMe,
 		Posts: posts,
 		PostsNum: len(posts),

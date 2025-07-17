@@ -10,33 +10,53 @@ import (
 )
 
 var (
-    JWTSecret  []byte
-	HostPort   int
+	JWTSecret   []byte
+	HostPort    int
+	Title       string
+	Description string
 )
 
 func LoadConfig() error {
-    if err := godotenv.Load(); err != nil {
-        log.Println("Error loading env variables from file, trying anyway...")
-    }
+	if err := godotenv.Load(); err != nil {
+		log.Println("Error loading env variables from file, trying anyway...")
+	}
 
-	var err error;
+	var err error
 
-	jwtSecretString, err := getEnv("JWT_SECRET");
-	if (err != nil) {return err}
+	jwtSecretString, err := getEnv("JWT_SECRET")
+	if err != nil {
+		return err
+	}
 	JWTSecret = []byte(jwtSecretString)
-	
-	port_str, err := getEnv("PORT");
-	if (err != nil) {return err}
 
-	HostPort, err = strconv.Atoi(port_str);
-	if (err != nil) {return err}
+	port_str, err := getEnv("PORT")
+	if err != nil {
+		return err
+	}
 
-	return nil;
+	HostPort, err = strconv.Atoi(port_str)
+	if err != nil {
+		return err
+	}
+
+	Title = getEnvDefault("TITLE", "Bloggo")
+	Description = getEnvDefault("DESCRIPTION", "A simple blogging platform")
+
+	log.Println("Title", Title)
+
+	return nil
 }
 
 func getEnv(key string) (string, error) {
-    if value, exists := os.LookupEnv(key); exists && value != "" {
-        return value, nil
-    }
-	return "", fmt.Errorf("%s env variable is not present", key);
+	if value, exists := os.LookupEnv(key); exists && value != "" {
+		return value, nil
+	}
+	return "", fmt.Errorf("%s env variable is not present", key)
+}
+
+func getEnvDefault(key string, defaultValue string) string {
+	if value, exists := os.LookupEnv(key); exists && value != "" {
+		return value
+	}
+	return defaultValue
 }

@@ -1,29 +1,38 @@
 package handlers
 
 import (
-	"path"
-	"net/http"
 	"html/template"
+	"net/http"
+	"path"
 
-	"github.com/PoulDev/lgBlog/internal/blog/model"
 	"github.com/PoulDev/lgBlog/internal/blog/db"
+	"github.com/PoulDev/lgBlog/internal/blog/model"
+	"github.com/PoulDev/lgBlog/internal/blog/config"
 )
 
-type Posts struct {
+type MainPage struct {
+	model.BasePageData
+
 	Posts []model.Post
 	PostsNum int
+	LoggedIn bool
 }
 
 func Main(w http.ResponseWriter, r *http.Request) {
+	_, err := checkJWTcookie(r)
+	loggedIn := err == nil
+
 	dbposts, err := db.GetPosts()
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
 
-	posts := Posts{
+	maindata := MainPage{
+		BasePageData: model.BasePageData{SiteTitle: config.Title, SiteDescription: config.Description, LoggedIn: loggedIn},
 		Posts: dbposts,
 		PostsNum: len(dbposts),
+		LoggedIn: loggedIn,
 	}
 
 	fp := path.Join("web", "templates", "index.html")
@@ -32,7 +41,7 @@ func Main(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	err = tmpl.Execute(w, posts)
+	err = tmpl.Execute(w, maindata)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return

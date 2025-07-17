@@ -1,23 +1,38 @@
 :root {
-    --text: #f4f0f1;
-    --background: #080607;
-    --primary: #c5b2b7;
-    --secondary: #648C88;
-    --accent: #797c9a;
+    --text: #110d0d;
+    --background: #fffaf5;
+    --primary: #9a817a;
+    --secondary: #b3c5b8;
+    --accent: #8ca8a7;
     --error: #aa2c2c;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overscroll-behavior: none;
 }
 
 body {
     background-color: var(--background);
     color: var(--text);
     font-family: sans-serif;
+    padding: 0;
+    margin: 0;
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
 .content {
     width: 90%;
     max-width: 700px;
     margin: 0 auto;
-    padding-top: 2rem;
+    padding-top: 1.5rem;
+
+    flex: 1;
 }
 
 input {
@@ -29,7 +44,7 @@ input, textarea {
     color: var(--text);
     border-radius: 0rem;
     border: none;
-    outline: 1px solid var(--secondary);
+    outline: 2px solid var(--primary);
     outline-offset: -1px;
 }
 
@@ -44,7 +59,7 @@ button {
 }
 
 button:hover {
-    background-color: var(--secondary);
+    background-color: var(--primary);
 }
 
 form input, form button {
@@ -52,7 +67,9 @@ form input, form button {
     margin: 0.2rem;
 }
 
-form {}
+a {
+    color: var(--primary);
+}
 
 .message-info {
     color: var(--primary);
@@ -67,8 +84,8 @@ form {}
     height: 100px;
     min-width: 100px;
     min-height: 100px;
+    border: 2px solid var(--primary);
 
-    border-radius: 20%;
     object-fit: cover;
 }
 
@@ -86,13 +103,19 @@ form {}
 
 .author a {
     text-decoration: none;
-    color: var(--secondary);
+    color: var(--primary);
 }
 
 .author img {
     width: 1.5rem;
     height: 1.5rem;
     border-radius: 50%;
+}
+
+.author-list {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
 }
 
 .profile {
@@ -130,17 +153,91 @@ form {}
 
 .posts .post {
     border-radius: 0rem;
-    border: 1.5px solid var(--primary);
+    
+    #background-color: var(--primary);
+    #color: var(--background);
+    border: 2px solid var(--primary);
+
     padding: 1rem;
     margin: 1rem;
 }
 
 .posts a {
     text-decoration: none;
-    color: var(--text);
+    #color: var(--background);
 }
 
 .posts .post h3 {
-    color: var(--secondary);
     margin: 0;
+}
+
+.write * {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.write .content {
+    height: 20rem;
+    width: 100%;
+    max-width: 100%;
+}
+
+
+.bottom, .top {
+    width: 100%;
+    background-color: var(--primary);
+    color: var(--background);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    box-sizing: border-box;
+}
+
+.bottom {
+
+}
+
+.bottom .info {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    box-sizing: border-box;
+    padding: 0rem 1rem;
+}
+
+.top h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+}
+
+.top .actions, .top .info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+.bottom p {
+    margin: 0;
+}
+
+.bottom a, .top a {
+    color: var(--background);
+}
+
+.title {
+    margin-top: 0;
+}
+
+@media screen and (max-width: 400px) {
+    .top .info p {
+        display: none;
+    }
 }

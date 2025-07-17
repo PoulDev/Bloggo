@@ -42,3 +42,9 @@ type Comment struct {
 	Created_at time.Time
 	Post       int64
 }
+
+type BasePageData struct {
+	SiteTitle       string
+	SiteDescription string
+	LoggedIn        bool
+}

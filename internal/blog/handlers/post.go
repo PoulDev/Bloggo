@@ -9,10 +9,13 @@ import (
 
 	"github.com/PoulDev/lgBlog/internal/blog/db"
 	"github.com/PoulDev/lgBlog/internal/blog/model"
+	"github.com/PoulDev/lgBlog/internal/blog/config"
 )
 
 type Post struct {
 	model.Post
+	model.BasePageData
+
 	Content template.HTML
 }
 
@@ -29,6 +32,9 @@ func PostPage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	_, err = checkJWTcookie(r)
+	loggedIn :=  err == nil
+
 
 	post, err := db.GetPost(int64(postid))
 	if err != nil {
@@ -42,7 +48,7 @@ func PostPage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	data := Post{post, template.HTML(string(post.Content))}
+	data := Post{post, model.BasePageData{SiteTitle: config.Title, SiteDescription: config.Description, LoggedIn: loggedIn}, template.HTML(string(post.Content))}
 
 	fp := path.Join("web", "templates", "post.html")
 	tmpl, err := template.ParseFiles(fp)

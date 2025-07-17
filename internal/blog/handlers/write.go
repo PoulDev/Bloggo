@@ -8,16 +8,23 @@ import (
 
 	"github.com/PoulDev/lgBlog/internal/blog/db"
 	"github.com/PoulDev/lgBlog/internal/blog/db/auth"
+	"github.com/PoulDev/lgBlog/internal/blog/model"
+	"github.com/PoulDev/lgBlog/internal/blog/config"
 )
 
 func writePage(w http.ResponseWriter, r *http.Request, uid int64) {
+	_, err := checkJWTcookie(r)
+	loggedIn := err == nil
+
+	pageData := model.BasePageData{SiteTitle: config.Title, SiteDescription: config.Description, LoggedIn: loggedIn}
+
 	fp := path.Join("web", "templates", "write.html")
 	tmpl, err := template.ParseFiles(fp)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-	err = tmpl.Execute(w, nil)
+	err = tmpl.Execute(w, pageData)
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
