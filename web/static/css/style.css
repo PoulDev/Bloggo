@@ -26,17 +26,22 @@ body {
     min-height: 100vh;
 }
 
+div.content {
+    padding-top: 1rem;
+}
+
 .content {
     width: 90%;
     max-width: 700px;
     margin: 0 auto;
-    padding-top: 1.5rem;
+    padding: 0.1rem;
 
     flex: 1;
 }
 
 input {
     height: 1.5rem;
+    padding: 0.1rem;
 }
 
 input, textarea {
@@ -48,17 +53,29 @@ input, textarea {
     outline-offset: -1px;
 }
 
-button {
+button, a.button {
     height: 1.5rem;
+    font-size: 0.9rem;
     background-color: var(--primary);
     color: var(--background);
     border-radius: 0rem;
     box-shadow: none;
     outline: none;
     border: none;
+    
+    margin: 0.1rem;
+    padding: none;
 }
 
-button:hover {
+a.button {
+    width: 100%;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    margin: 0.2rem;
+}
+
+button:hover, a.button:hover {
     background-color: var(--primary);
 }
 
@@ -174,7 +191,6 @@ a {
 .write * {
     width: 100%;
     margin: 0;
-    padding: 0;
 
     margin-top: 0.25rem;
     margin-bottom: 0.25rem;

@@ -38,6 +38,12 @@
                 </div>
                 {{ end }}
             </div>
+            {{ if .LoggedIn }}
+            <form action="/post/{{ .ID }}/delete" method="POST">
+                <button type="submit">Delete Post</button>
+            </form>
+            <a class="button" href="/write?id={{ .ID }}">Edit Post</a>
+            {{ end }}
         </div>
 
 

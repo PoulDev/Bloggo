@@ -7,9 +7,9 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/PoulDev/lgBlog/internal/blog/config"
 	"github.com/PoulDev/lgBlog/internal/blog/db"
 	"github.com/PoulDev/lgBlog/internal/blog/model"
-	"github.com/PoulDev/lgBlog/internal/blog/config"
 )
 
 type Post struct {
@@ -21,7 +21,18 @@ type Post struct {
 
 func PostPage(w http.ResponseWriter, r *http.Request) {
 	parts := strings.Split(strings.Trim(r.URL.Path, "/"), "/")
-    if len(parts) != 2 || parts[0] != "post" {
+
+    if len(parts) == 3 && parts[0] == "post" {
+		if parts[2] == "delete" {
+			deletePostApi(w, r)
+		} else if parts[2] == "edit" {
+			editPostApi(w, r)
+		}
+        http.NotFound(w, r)
+		return
+	}
+
+	if len(parts) != 2 {
         http.NotFound(w, r)
         return
     }
@@ -63,4 +74,3 @@ func PostPage(w http.ResponseWriter, r *http.Request) {
 	}
 
 }
-

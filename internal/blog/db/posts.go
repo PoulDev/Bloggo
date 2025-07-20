@@ -82,7 +82,6 @@ func GetAuthors(postId int64) ([]model.Author, error) {
 
 func NewPost(title string, content string, description string, authors []int64) (int64, error) {
 	markdown := string(mdToHTML([]byte(content)))
-
 	sanitized := bmp.Sanitize(markdown)
 
 	result, err := DB.Exec("INSERT INTO posts (title, description, content, contentRaw, created_at) VALUES (?, ?, ?, ?, ?)", title, description, sanitized, content, time.Now().UTC().Unix())
@@ -104,4 +103,30 @@ func NewPost(title string, content string, description string, authors []int64) 
 	}
 
     return post, nil
+}
+
+func DeletePost(id int64) error {
+	_, err := DB.Exec("DELETE FROM posts WHERE id = ?", id)
+	if err != nil {
+		return err
+	}
+
+	_, err = DB.Exec("DELETE FROM post_authors WHERE post = ?", id)
+	if err != nil {
+		return err
+	}
+
+    return nil
+}
+
+func UpdatePost(id int64, title string, content string, description string) error {
+	markdown := string(mdToHTML([]byte(content)))
+	sanitized := bmp.Sanitize(markdown)
+
+	_, err := DB.Exec("UPDATE posts SET title = ?, description = ?, content = ?, contentRaw = ? WHERE id = ?", title, description, sanitized, content, id)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }

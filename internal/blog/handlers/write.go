@@ -5,18 +5,48 @@ import (
 	"html/template"
 	"net/http"
 	"path"
+	"strconv"
 
+	"github.com/PoulDev/lgBlog/internal/blog/config"
 	"github.com/PoulDev/lgBlog/internal/blog/db"
 	"github.com/PoulDev/lgBlog/internal/blog/db/auth"
 	"github.com/PoulDev/lgBlog/internal/blog/model"
-	"github.com/PoulDev/lgBlog/internal/blog/config"
 )
+
+type WritePageData struct {
+	model.BasePageData
+	Post model.Post
+	EditPost bool
+}
 
 func writePage(w http.ResponseWriter, r *http.Request, uid int64) {
 	_, err := checkJWTcookie(r)
 	loggedIn := err == nil
 
-	pageData := model.BasePageData{SiteTitle: config.Title, SiteDescription: config.Description, LoggedIn: loggedIn}
+	pageData := WritePageData{
+		BasePageData: model.BasePageData{
+			SiteTitle: config.Title,
+			SiteDescription: config.Description,
+			LoggedIn: loggedIn,
+		},
+		Post: model.Post{},
+		EditPost: false,
+	}
+
+	if r.URL.Query().Get("id") != "" {
+		postId, err := strconv.Atoi(r.URL.Query().Get("id"))
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+
+		pageData.EditPost = true 
+		pageData.Post, err = db.GetPost(int64(postId))
+		if err != nil {
+			http.Error(w, err.Error(), http.StatusInternalServerError)
+			return
+		}
+	}
 
 	fp := path.Join("web", "templates", "write.html")
 	tmpl, err := template.ParseFiles(fp)
