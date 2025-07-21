@@ -15,7 +15,6 @@ func RegisterHandlers(mux *http.ServeMux) {
     mux.HandleFunc("/", handlers.Main)
 	mux.HandleFunc("/login", handlers.Login)
 	mux.HandleFunc("/profile", handlers.ProfilePage)
-	mux.HandleFunc("/post/", handlers.PostPage)
 	mux.HandleFunc("/write", handlers.WriteHandler)
 	mux.HandleFunc("/post/", handlers.PostPage)
 

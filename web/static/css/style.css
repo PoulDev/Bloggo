@@ -26,6 +26,11 @@ body {
     min-height: 100vh;
 }
 
+code {
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
 div.content {
     padding-top: 1rem;
 }
