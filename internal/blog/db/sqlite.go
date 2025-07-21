@@ -35,7 +35,7 @@ func initSchema(db *sql.DB) {
 		log.Fatal(err)
 	}
 	
-	_, err = CreateAccount(model.Author{Name: "admin", Picture: "https://i.imgur.com/OwNfL6m.png"}, password, model.RoleAdmin)
+	_, err = CreateAccount(model.Author{Name: "admin", Picture: "https://i.imgur.com/yOKOBno.png"}, password, model.RoleAdmin)
 	if err != nil {
 		log.Fatal(err)
 	}

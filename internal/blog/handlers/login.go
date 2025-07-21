@@ -6,12 +6,15 @@ import (
 	"path"
 	"time"
 
-	"github.com/golang-jwt/jwt"
+	"github.com/PoulDev/lgBlog/internal/blog/config"
 	"github.com/PoulDev/lgBlog/internal/blog/db"
 	"github.com/PoulDev/lgBlog/internal/blog/db/auth"
+	"github.com/PoulDev/lgBlog/internal/blog/model"
+	"github.com/golang-jwt/jwt"
 )
 
 type Message struct {
+	model.BasePageData
 	Type string
 	Message string
 }
@@ -42,7 +45,7 @@ func loginApi(w http.ResponseWriter, r *http.Request) {
 
 	account, err := db.Login(username, password)
 	if err != nil {
-		loginPage(w, r, Message{Type: "error", Message: err.Error()})
+		loginPage(w, r, Message{BasePageData: model.BasePageData{SiteTitle: config.Title, SiteDescription: config.Description, LoggedIn: false}, Type: "error", Message: err.Error()})
 		return
 	}
 
@@ -60,7 +63,8 @@ func loginApi(w http.ResponseWriter, r *http.Request) {
 func Login(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case http.MethodGet:
-		loginPage(w, r, Message{Type: "info", Message: "Please login into your account"})
+		msg := Message{model.BasePageData{SiteTitle: config.Title, SiteDescription: config.Description, LoggedIn: false}, "info", "Please login to continue"}
+		loginPage(w, r, msg)
 	case http.MethodPost:
 		loginApi(w, r)
 	default:
