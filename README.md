@@ -2,21 +2,22 @@
 
 Bloggo is a simple blogging platform designed to be lightweight and easy to use.
 
-![Bloggo Screenshot](./imgs/screenshot-desktop.jpg)
-![Bloggo Screenshot Mobile](./imgs/screenshot-mobile.jpg)
+<img src="./imgs/screenshot-mobile.jpg" height="400"> <img src="./imgs/screenshot-desktop.jpg" height="400">
+
 
 ## Features
 - **Lightweight**: Built using only builtin golang libraries, on `net/http`. The whole database is a small sqlite file. 
 - **Customizable**: Easily configure the app title, description, and more through environment variables.
+- **Responsive**: Mobile & desktop :D
 
 ## Getting Started
 
-> [!WARN] Warning!
+> [!WARNING]
 > The release is built ONLY for linux, if you want to host it on another operating system, you will need to compile it from scratch.
 
 1. Start by downloading and unzip the bloggo-{date}.tar.gz file from the [latest release](https://github.com/PoulDev/Bloggo/releases/latest).
 2. Execute `chmod u+x ./bloggo`
-3. Create a .env file with basic configuration, see [Configuration](#Configuration), every variable with N/A as the default value must be set. ( `JWT_SECRET` and `PORT` ). See [[#Example `.env` File]]
+3. Create a .env file with basic configuration, see [Configuration](#configuration), every variable with N/A as the default value must be set. ( `JWT_SECRET` and `PORT` ). See [#Example `.env` File](#example-env-file)
 4. Run `(source .env && ./bloggo)`
 
 ## Configuration
