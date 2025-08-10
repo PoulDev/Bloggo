@@ -1,2 +1,2 @@
-# lgBlog
-lgBlog: Lightweight Golang Blogging platform
+# Bloggo
+Lightweight Golang Blogging platform
