@@ -19,6 +19,7 @@ Bloggo is a simple blogging platform designed to be lightweight and easy to use.
 2. Execute `chmod u+x ./bloggo`
 3. Create a .env file with basic configuration, see [Configuration](#configuration), every variable with N/A as the default value must be set. ( `JWT_SECRET` and `PORT` ). See [example `.env` File](#example-env-file)
 4. Run `(source .env && ./bloggo)`
+5. The admin password will be printed into the console, use it to login to the admin panel.
 
 ## Configuration
 
