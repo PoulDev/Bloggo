@@ -46,5 +46,6 @@ type Comment struct {
 type BasePageData struct {
 	SiteTitle       string
 	SiteDescription string
+	ShowCredits     bool
 	LoggedIn        bool
 }

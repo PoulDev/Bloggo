@@ -65,7 +65,7 @@ func ProfilePage(w http.ResponseWriter, r *http.Request) {
 
 	profile := Profile{
 		Author: author,
-		BasePageData: model.BasePageData{SiteTitle: config.Title, SiteDescription: config.Description, LoggedIn: loggedUserId != 0},
+		BasePageData: model.BasePageData{SiteTitle: config.Title, SiteDescription: config.Description, ShowCredits: config.ShowCredits, LoggedIn: loggedUserId != 0},
 
 		IsItMe: isItMe,
 		Posts: posts,

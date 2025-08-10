@@ -29,7 +29,7 @@ func Main(w http.ResponseWriter, r *http.Request) {
 	}
 
 	maindata := MainPage{
-		BasePageData: model.BasePageData{SiteTitle: config.Title, SiteDescription: config.Description, LoggedIn: loggedIn},
+		BasePageData: model.BasePageData{SiteTitle: config.Title, SiteDescription: config.Description, ShowCredits: config.ShowCredits, LoggedIn: loggedIn},
 		Posts: dbposts,
 		PostsNum: len(dbposts),
 		LoggedIn: loggedIn,

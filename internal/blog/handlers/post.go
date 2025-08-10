@@ -59,7 +59,7 @@ func PostPage(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	data := Post{post, model.BasePageData{SiteTitle: config.Title, SiteDescription: config.Description, LoggedIn: loggedIn}, template.HTML(string(post.Content))}
+	data := Post{post, model.BasePageData{SiteTitle: config.Title, SiteDescription: config.Description, ShowCredits: config.ShowCredits, LoggedIn: loggedIn}, template.HTML(string(post.Content))}
 
 	fp := path.Join("web", "templates", "post.html")
 	tmpl, err := template.ParseFiles(fp)

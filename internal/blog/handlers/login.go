@@ -15,7 +15,7 @@ import (
 
 type Message struct {
 	model.BasePageData
-	Type string
+	Type    string
 	Message string
 }
 
@@ -31,7 +31,6 @@ func loginPage(w http.ResponseWriter, r *http.Request, message Message) {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}
-
 }
 
 func loginApi(w http.ResponseWriter, r *http.Request) {
@@ -45,7 +44,7 @@ func loginApi(w http.ResponseWriter, r *http.Request) {
 
 	account, err := db.Login(username, password)
 	if err != nil {
-		loginPage(w, r, Message{BasePageData: model.BasePageData{SiteTitle: config.Title, SiteDescription: config.Description, LoggedIn: false}, Type: "error", Message: err.Error()})
+		loginPage(w, r, Message{BasePageData: model.BasePageData{SiteTitle: config.Title, SiteDescription: config.Description, ShowCredits: config.ShowCredits, LoggedIn: false}, Type: "error", Message: err.Error()})
 		return
 	}
 
@@ -63,7 +62,7 @@ func loginApi(w http.ResponseWriter, r *http.Request) {
 func Login(w http.ResponseWriter, r *http.Request) {
 	switch r.Method {
 	case http.MethodGet:
-		msg := Message{model.BasePageData{SiteTitle: config.Title, SiteDescription: config.Description, LoggedIn: false}, "info", "Please login to continue"}
+		msg := Message{model.BasePageData{SiteTitle: config.Title, SiteDescription: config.Description, ShowCredits: config.ShowCredits, LoggedIn: false}, "info", "Please login to continue"}
 		loginPage(w, r, msg)
 	case http.MethodPost:
 		loginApi(w, r)

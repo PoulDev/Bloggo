@@ -27,6 +27,7 @@ func writePage(w http.ResponseWriter, r *http.Request, uid int64) {
 		BasePageData: model.BasePageData{
 			SiteTitle: config.Title,
 			SiteDescription: config.Description,
+			ShowCredits: config.ShowCredits,
 			LoggedIn: loggedIn,
 		},
 		Post: model.Post{},

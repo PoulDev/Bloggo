@@ -10,6 +10,8 @@
 tmp/
 ./main
 ./bloggo
+./build
+bloggo-*.tar.gz
 
 # Test binary, built with `go test -c`
 *.test

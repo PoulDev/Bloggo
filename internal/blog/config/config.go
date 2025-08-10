@@ -14,6 +14,7 @@ var (
 	HostPort    int
 	Title       string
 	Description string
+	ShowCredits bool
 )
 
 func LoadConfig() error {
@@ -41,6 +42,7 @@ func LoadConfig() error {
 
 	Title = getEnvDefault("TITLE", "Bloggo")
 	Description = getEnvDefault("DESCRIPTION", "A simple blogging platform")
+	ShowCredits = getEnvDefault("SHOW_CREDITS", "true") != "false"
 
 	log.Println("Title", Title)
 
