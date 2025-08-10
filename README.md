@@ -1,2 +1,43 @@
 # Bloggo
-Lightweight Golang Blogging platform
+
+Bloggo is a simple blogging platform designed to be lightweight and easy to use.
+
+![Bloggo Screenshot](./imgs/screenshot-desktop.jpg)
+![Bloggo Screenshot Mobile](./imgs/screenshot-mobile.jpg)
+
+## Features
+- **Lightweight**: Built using only builtin golang libraries, on `net/http`. The whole database is a small sqlite file. 
+- **Customizable**: Easily configure the app title, description, and more through environment variables.
+
+## Getting Started
+
+> [!WARN] Warning!
+> The release is built ONLY for linux, if you want to host it on another operating system, you will need to compile it from scratch.
+
+1. Start by downloading and unzip the bloggo-{date}.tar.gz file from the [latest release](https://github.com/PoulDev/Bloggo/releases/latest).
+2. Execute `chmod u+x ./bloggo`
+3. Create a .env file with basic configuration, see [Configuration](#Configuration), every variable with N/A as the default value must be set. ( `JWT_SECRET` and `PORT` ). See [[#Example `.env` File]]
+4. Run `(source .env && ./bloggo)`
+
+## Configuration
+
+The application settings are managed through environment variables. Below is a description of each configuration:
+
+| Variable       | Description                                     | Default Value              |
+|----------------|-------------------------------------------------|----------------------------|
+| `JWT_SECRET`   | A secret key used for signing JWTs. **Required** | N/A                        |
+| `PORT`         | The port on which the application will run. **Required** | N/A                        |
+| `TITLE`        | The title of the blog.                          | "Bloggo"                   |
+| `DESCRIPTION`  | A short description of the blog.                | "A simple blogging platform" |
+| `SHOW_CREDITS` | Whether to show credits in the application.     | "true" (set to "false" to disable) |
+
+### Example `.env` File
+
+```plaintext
+JWT_SECRET=your_RANDOM_jwt_secret
+PORT=8080
+TITLE=An Awesome Blog
+DESCRIPTION=Awesome stuff posted here!
+SHOW_CREDITS=true
+```
+
