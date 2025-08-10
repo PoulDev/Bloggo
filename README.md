@@ -2,7 +2,7 @@
 
 Bloggo is a simple blogging platform designed to be lightweight and easy to use.
 
-<img src="./imgs/screenshot-mobile.jpg" height="400"> <img src="./imgs/screenshot-desktop.jpg" height="400">
+<img src="./imgs/screenshot-mobile.jpg" height="350"> <img src="./imgs/screenshot-desktop.jpg" height="350">
 
 
 ## Features
@@ -17,7 +17,7 @@ Bloggo is a simple blogging platform designed to be lightweight and easy to use.
 
 1. Start by downloading and unzip the bloggo-{date}.tar.gz file from the [latest release](https://github.com/PoulDev/Bloggo/releases/latest).
 2. Execute `chmod u+x ./bloggo`
-3. Create a .env file with basic configuration, see [Configuration](#configuration), every variable with N/A as the default value must be set. ( `JWT_SECRET` and `PORT` ). See [#Example `.env` File](#example-env-file)
+3. Create a .env file with basic configuration, see [Configuration](#configuration), every variable with N/A as the default value must be set. ( `JWT_SECRET` and `PORT` ). See [example `.env` File](#example-env-file)
 4. Run `(source .env && ./bloggo)`
 
 ## Configuration
