@@ -19,4 +19,5 @@ func RegisterHandlers(mux *http.ServeMux) {
 	mux.HandleFunc("/post/", handlers.PostPage)
 
     mux.Handle("/css/", http.FileServer(http.Dir("./web/static/")))
+    mux.Handle("/img/", http.FileServer(http.Dir("./web/static/")))
 }

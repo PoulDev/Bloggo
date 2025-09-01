@@ -1,10 +1,9 @@
 :root {
-    --text: #110d0d;
-    --background: #fffaf5;
-    --primary: #9B7970;
-    --secondary: #b3c5b8;
-    --accent: #8ca8a7;
-    --error: #aa2c2c;
+    --text: #291B00;
+    --background: #FFF4E0;
+    --primary: #BF8F65;
+    --secondary: #DBB593;
+    --error: #D9663D;
 }
 
 html, body {
@@ -12,6 +11,26 @@ html, body {
     padding: 0;
     height: 100%;
     overscroll-behavior: none;
+}
+
+.banner {
+    width: 100%;
+    height: 10rem;
+    overflow: hidden;
+}
+
+.banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: bottom; 
+    display: block;
+}
+
+pre:has(> code) {
+    background-color: var(--text);
+    color: var(--background);
+    padding: 1rem;
 }
 
 body {
@@ -221,7 +240,7 @@ a {
 }
 
 .bottom {
-
+    background-color: var(--primary);
 }
 
 .bottom .info {

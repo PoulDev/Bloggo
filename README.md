@@ -10,7 +10,7 @@ Bloggo is a simple blogging platform designed to be lightweight and easy to use.
 - **Customizable**: Easily configure the app title, description, and more through environment variables.
 - **Responsive**: Mobile & desktop :D
 
-## Getting Started
+# Getting Started
 
 > [!WARNING]
 > The release is built ONLY for linux, if you want to host it on another operating system, you will need to compile it from scratch.
@@ -41,5 +41,14 @@ PORT=8080
 TITLE=An Awesome Blog
 DESCRIPTION=Awesome stuff posted here!
 SHOW_CREDITS=true
+```
+
+# Development
+```bash
+JWT_SECRET=secret PORT=8080 go run cmd/bloggo/main.go
+```
+Or, if you want to use the .env file: ([Environment Configuration](#configuration))
+```bash
+(source .env && go run cmd/bloggo/main.go)
 ```
 
