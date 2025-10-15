@@ -1,6 +1,7 @@
 package db
 
 import (
+	"strings"
 	"time"
 
 	"github.com/PoulDev/lgBlog/internal/blog/model"
@@ -10,7 +11,13 @@ import (
 	"github.com/gomarkdown/markdown/parser"
 )
 
-func mdToHTML(md []byte) []byte {
+func mdToHTML(content string) []byte {
+	content = strings.ReplaceAll(content, "\n\n", "\n\n<br>\n\n")
+	content = strings.ReplaceAll(content, "\n\r\n\r", "\n\n<br>\n\n")
+	content = strings.ReplaceAll(content, "\r\n\r\n", "\n\n<br>\n\n")
+
+	md := []byte(content)
+
 	extensions := parser.CommonExtensions | parser.AutoHeadingIDs | parser.Footnotes | parser.HardLineBreak
 	p := parser.NewWithExtensions(extensions)
 	doc := p.Parse(md)
@@ -81,7 +88,7 @@ func GetAuthors(postId int64) ([]model.Author, error) {
 }
 
 func NewPost(title string, content string, description string, authors []int64) (int64, error) {
-	markdown := string(mdToHTML([]byte(content)))
+	markdown := string(mdToHTML(content))
 	sanitized := bmp.Sanitize(markdown)
 
 	result, err := DB.Exec("INSERT INTO posts (title, description, content, contentRaw, created_at) VALUES (?, ?, ?, ?, ?)", title, description, sanitized, content, time.Now().UTC().Unix())
@@ -120,7 +127,7 @@ func DeletePost(id int64) error {
 }
 
 func UpdatePost(id int64, title string, content string, description string) error {
-	markdown := string(mdToHTML([]byte(content)))
+	markdown := string(mdToHTML(content))
 	sanitized := bmp.Sanitize(markdown)
 
 	_, err := DB.Exec("UPDATE posts SET title = ?, description = ?, content = ?, contentRaw = ? WHERE id = ?", title, description, sanitized, content, id)
