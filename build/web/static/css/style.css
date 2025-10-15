@@ -1,0 +1,283 @@
+:root {
+    --text: #291B00;
+    --background: #FFF4E0;
+    --primary: #BF8F65;
+    --secondary: #DBB593;
+    --error: #D9663D;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overscroll-behavior: none;
+}
+
+.banner {
+    width: 100%;
+    height: 10rem;
+    overflow: hidden;
+}
+
+.banner img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: bottom; 
+    display: block;
+}
+
+pre:has(> code) {
+    background-color: var(--text);
+    color: var(--background);
+    padding: 1rem;
+}
+
+body {
+    background-color: var(--background);
+    color: var(--text);
+    font-family: sans-serif;
+    padding: 0;
+    margin: 0;
+
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+code {
+    white-space: pre-wrap;
+    word-break: break-all;
+}
+
+div.content {
+    padding-top: 1rem;
+}
+
+.content {
+    width: 90%;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 0.1rem;
+
+    flex: 1;
+}
+
+input {
+    height: 1.5rem;
+    padding: 0.1rem;
+}
+
+input, textarea {
+    background-color: var(--background);
+    color: var(--text);
+    border-radius: 0rem;
+    border: none;
+    outline: 2px solid var(--primary);
+    outline-offset: -1px;
+}
+
+button, a.button {
+    height: 1.5rem;
+    font-size: 0.9rem;
+    background-color: var(--primary);
+    color: var(--background);
+    border-radius: 0rem;
+    box-shadow: none;
+    outline: none;
+    border: none;
+    
+    margin: 0.1rem;
+    padding: none;
+}
+
+a.button {
+    width: 100%;
+    display: block;
+    text-align: center;
+    text-decoration: none;
+    margin: 0.2rem;
+}
+
+button:hover, a.button:hover {
+    background-color: var(--primary);
+}
+
+form input, form button {
+    width: 100%;
+    margin: 0.2rem;
+}
+
+a {
+    color: var(--primary);
+}
+
+.message-info {
+    color: var(--primary);
+}
+
+.message-error {
+    color: var(--error);
+}
+
+.profile img {
+    width: 100px;
+    height: 100px;
+    min-width: 100px;
+    min-height: 100px;
+    border: 2px solid var(--primary);
+
+    object-fit: cover;
+}
+
+.profile .info p, .profile .info h1 {
+    margin: 0;
+}
+
+.author {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    gap: 1rem;
+    padding-bottom: 1rem;
+}
+
+.author a {
+    text-decoration: none;
+    color: var(--primary);
+}
+
+.author img {
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+}
+
+.author-list {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+}
+
+.profile {
+    display: flex;
+    align-items: top;
+    gap: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--primary);
+}
+
+.profile .picture {
+    width: 100px;
+}
+
+.labelinput {
+    display: block;
+    font-size: 2em;
+    margin: 0;
+    font-weight: bold;
+    height: 1.5em;
+
+    outline: none;
+    border: none;
+}
+
+.posts > h2 {
+    text-align: center;
+}
+
+.posts > h3 {
+    text-align: center;
+    font-weight: normal;
+    font-size: 1rem;
+}
+
+.posts .post {
+    border-radius: 0rem;
+    
+    #background-color: var(--primary);
+    #color: var(--background);
+    border: 2px solid var(--primary);
+
+    padding: 1rem;
+    margin: 1rem;
+}
+
+.posts a {
+    text-decoration: none;
+    #color: var(--background);
+}
+
+.posts .post h3 {
+    margin: 0;
+}
+
+.write * {
+    width: 100%;
+    margin: 0;
+
+    margin-top: 0.25rem;
+    margin-bottom: 0.25rem;
+}
+
+.write .content {
+    height: 20rem;
+    width: 100%;
+    max-width: 100%;
+}
+
+
+.bottom, .top {
+    width: 100%;
+    background-color: var(--primary);
+    color: var(--background);
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1rem;
+    box-sizing: border-box;
+}
+
+.bottom {
+    background-color: var(--primary);
+}
+
+.bottom .info {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 1rem;
+    box-sizing: border-box;
+    padding: 0rem 1rem;
+}
+
+.top h1, h2, h3, h4, h5, h6, p {
+    margin: 0;
+}
+
+.top .actions, .top .info {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem;
+}
+
+.bottom p {
+    margin: 0;
+}
+
+.bottom a, .top a {
+    color: var(--background);
+}
+
+.title {
+    margin-top: 0;
+}
+
+@media screen and (max-width: 400px) {
+    .top .info p {
+        display: none;
+    }
+}

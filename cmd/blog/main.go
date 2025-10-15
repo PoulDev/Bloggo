@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
     "log"
     "net/http"
 
@@ -21,8 +22,8 @@ func main() {
 
     blog.RegisterHandlers(mux)
 
-    log.Println("Starting server on :8080")
-    if err := http.ListenAndServe(":8080", mux); err != nil {
+	log.Println("Starting server on port", config.HostPort)
+    if err := http.ListenAndServe(fmt.Sprintf(":%d", config.HostPort), mux); err != nil {
         log.Fatal(err)
     }
 }

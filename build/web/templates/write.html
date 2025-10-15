@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title></title>
+        <link href="css/style.css" rel="stylesheet">
+    </head>
+    <body>
+        <div class="top">
+            <div class="info">
+                <h2><a href="/">{{ .SiteTitle }}</a></h2>
+                <p>{{ .SiteDescription }}</p>
+            </div>
+            <div class="actions">
+                {{ if .LoggedIn }}
+                    <a href="/write">Write</a>
+                    <a href="/profile">Profile</a>
+                {{ else }}
+                    <a href="/login">Login</a>
+                {{ end }}
+            </div>
+        </div>
+
+        <div class="content">
+            {{ if .EditPost }}
+                <form action="/post/{{ .Post.ID }}/edit" method="post" class="write">
+            {{ else }}
+                <form action="/write" method="post" class="write">
+            {{ end }}
+
+                <h1>New Post</h1>
+                <input type="text" name="title" value="{{ .Post.Title }}" placeholder="Title" required>
+                <textarea name="content" placeholder="Content - Markdown supported!" class="content" required>{{ .Post.ContentRaw }}</textarea>
+                <textarea name="description" placeholder="Description" required>{{ .Post.Description }}</textarea>
+                <button type="submit">
+                    {{ if .EditPost }}
+                        Update Post
+                    {{ else }}
+                        Publish
+                    {{ end }}
+                </button>
+            </form>
+        </div>
+
+
+        {{ if .ShowCredits }}
+        <div class="bottom">
+            <div class="info">
+                <p>Made with &lt;3 by 🧙‍♂️ <a href="https://github.com/PoulDev">PoulDev</a></p>
+                <a href="https://github.com/PoulDev/lgBlog">Source Code</a>
+            </div>
+        </div>
+        {{ end }}
+    </body>
+</html>
