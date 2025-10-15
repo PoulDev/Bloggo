@@ -50,14 +50,14 @@ func LoadConfig() error {
 }
 
 func getEnv(key string) (string, error) {
-	if value, exists := os.LookupEnv(key); exists && value != "" {
+	if value, exists := os.LookupEnv(key); exists {
 		return value, nil
 	}
 	return "", fmt.Errorf("%s env variable is not present", key)
 }
 
 func getEnvDefault(key string, defaultValue string) string {
-	if value, exists := os.LookupEnv(key); exists && value != "" {
+	if value, exists := os.LookupEnv(key); exists {
 		return value
 	}
 	return defaultValue

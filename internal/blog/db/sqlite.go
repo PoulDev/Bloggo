@@ -35,17 +35,12 @@ func initSchema(db *sql.DB) {
 		log.Fatal(err)
 	}
 	
-	_, err = CreateAccount(model.Author{Name: "admin", Picture: "https://i.imgur.com/yOKOBno.png"}, password, model.RoleAdmin)
+	_, err = CreateAccount(model.Author{Name: "admin", Picture: "/img/admin.jpg"}, password, model.RoleAdmin)
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	log.Println("Login using username: admin, password:", password)
-
-	_, err = NewPost("Titolone", "contenuto contenuto <h1>contenuuuuto</h1>", "descrizione bellona", []int64{1})
-	if (err != nil) {
-		log.Fatal(err)
-	}
 
 }
 
