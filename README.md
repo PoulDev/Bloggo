@@ -38,8 +38,8 @@ The application settings are managed through environment variables. Below is a d
 ```plaintext
 JWT_SECRET=your_RANDOM_jwt_secret
 PORT=8080
-TITLE=An Awesome Blog
-DESCRIPTION=Awesome stuff posted here!
+TITLE="An Awesome Blog"
+DESCRIPTION="Awesome stuff posted here!"
 SHOW_CREDITS=true
 ```
 

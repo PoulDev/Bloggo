@@ -15,6 +15,7 @@ var (
 	Title       string
 	Description string
 	ShowCredits bool
+	PrivateBlog bool
 )
 
 func LoadConfig() error {
@@ -43,6 +44,7 @@ func LoadConfig() error {
 	Title = getEnvDefault("TITLE", "Bloggo")
 	Description = getEnvDefault("DESCRIPTION", "A simple blogging platform")
 	ShowCredits = getEnvDefault("SHOW_CREDITS", "true") != "false"
+	PrivateBlog = getEnvDefault("PRIVATE_BLOG", "false") != "false"
 
 	log.Println("Title", Title)
 

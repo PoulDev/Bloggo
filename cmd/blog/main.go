@@ -20,7 +20,7 @@ func main() {
 
     mux := http.NewServeMux()
 
-    blog.RegisterHandlers(mux)
+    blog.RegisterHandlers(blog.ServeMux{ServeMux: mux})
 
 	log.Println("Starting server on port", config.HostPort)
     if err := http.ListenAndServe(fmt.Sprintf(":%d", config.HostPort), mux); err != nil {
